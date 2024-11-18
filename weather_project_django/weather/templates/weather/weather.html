@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Checker</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f0f0f0; /* Default background color */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent to see the background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        body.sunny {
+            background-image: url("{% static 'images/backgrounds/sunny.jpg' %}");
+        }
+
+        body.cloudy {
+            background-image: url("{% static 'images/backgrounds/cloudy.jpg' %}");
+        }
+
+        body.rainy {
+            background-image: url("{% static 'images/backgrounds/rainy.jpg' %}");
+        }
+
+        body.snowy {
+            background-image: url("{% static 'images/backgrounds/snowy.jpg' %}");
+        }
+
+        body.storm {
+            background-image: url("{% static 'images/backgrounds/storm.jpg' %}");
+        }
+
+        body.sunny_night,
+        body.cloudy_night,
+        body.rainy_night,
+        body.snowy_night,
+        body.storm_night {
+            background-image: url("{% static 'images/backgrounds/nighttime.jpg' %}");
+        }
+
+        body {
+            background-size: cover; /* Make sure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background from repeating */
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .weather-details {
+            margin-top: 20px;
+        }
+
+        .weather-details p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #1e90ff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body class="{{ detailed_data.background_class }}">
+    <div class="container">
+        <h1>Weather in {{ detailed_data.city }}</h1>
+        <div class="weather-details">
+            <p><strong>Temperature:</strong> {{ detailed_data.temperature }}°C</p>
+            <p><strong>Weather:</strong> {{ detailed_data.weather }}</p>
+            <p><strong>Humidity:</strong> {{ detailed_data.humidity }}%</p>
+            <p><strong>Wind Speed:</strong> {{ detailed_data.wind_speed }} m/s</p>
+            <p><strong>Pressure:</strong> {{ detailed_data.pressure }} hPa</p>
+            <p><strong>Sunrise:</strong> {{ detailed_data.sunrise }}</p>
+            <p><strong>Sunset:</strong> {{ detailed_data.sunset }}</p>
+        </div>
+
+        <form method="GET">
+            <input type="text" name="city" placeholder="Enter city" required>
+            <button type="submit">Check Weather</button>
+        </form>
+    </div>
+</body>
+</html>
